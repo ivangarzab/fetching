@@ -1,8 +1,6 @@
 [![Build Check](https://github.com/ivangarzab/fetching/actions/workflows/build-n-test.yml/badge.svg?branch=main)](https://github.com/ivangarzab/fetching/actions/workflows/build-n-test.yml)
 
-# Fetch Rewards Coding Exercise - Software Engineering - Mobile
-
-## General
+# Fetch Rewards Coding Exercise: Software Engineering - Mobile
 
 The purpose of this repository is to create a simple app that fetches the contents of [this data set](https://hiring.fetch.com/hiring.json), and displays them in a list.
 
@@ -26,7 +24,7 @@ This architecture is similar to [Android's recommended architecture](https://dev
 
 Moreover, I'm using Koin for dependency injection, as to facilitate the discovery and acquisition of dependencies throughout the project.
 
-## Trade-offs
+## Trade-Offs
 
 For the purpose of time, I skipped or avoided doing the following:
 
@@ -43,4 +41,4 @@ I hope you'll consider my candidacy, and I'm looking forward to talk about my so
 
 Thank you for your time, and let's keep the conversation going ✌️
 
-- [Iván Garza Bermea](https://github.com/ivangarzab)
+-- _[Iván Garza Bermea](https://github.com/ivangarzab)_

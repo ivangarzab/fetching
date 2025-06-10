@@ -35,7 +35,7 @@ For the purpose of time, I skipped or avoided doing the following:
 
 There might be more oversights that I failed to list here, and I'm looking forward to discuss them all in the next step of the interview process.
 
-## Final Notes
+## Final Note
 
 I hope you'll consider my candidacy, and I'm looking forward to talk about my solution at any time!
 

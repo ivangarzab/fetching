@@ -8,7 +8,7 @@ The list items should be grouped by their `listId` field, and sorted by their `n
 
 Moreover, the list should not display any items that have a `null` or blank `name` field in the final result.
 
-## Details
+## Details (test2)
 
 The project's min requirements must've taken me about 3 hours and a half to complete more or less, and I used an extra hour to create a decent (but not exhaustive) test suit for it.  
 

@@ -34,17 +34,46 @@ import com.ivangarzab.fetching.domain.model.Hiring
 import com.ivangarzab.fetching.domain.model.HiringMatrix
 import com.ivangarzab.fetching.domain.model.HiringSection
 import com.ivangarzab.fetching.ui.theme.FetchingTheme
+import com.openreplay.tracker.OpenReplay
+import com.openreplay.tracker.listeners.NetworkListener
+import com.openreplay.tracker.models.OROptions
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        startOpenReplay(this@MainActivity)
         enableEdgeToEdge()
         setContent {
             FetchingTheme {
                 MainScreen()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        OpenReplay.stop()
+    }
+
+    private fun startOpenReplay(activity: ComponentActivity) {
+        // not required if you're using our SaaS version
+//        OpenReplay.serverURL = "https://app.openreplay.com/ingest"
+        OpenReplay.serverURL = "https://localhost:8080"
+        // check out our SDK docs to see available options
+        OpenReplay.start(
+            activity,
+            "imxCflcQgtohGQPdMCXz",
+            OROptions(
+                logs = true,
+                debugLogs = true
+            ),
+            onStarted = {
+                println("OpenReplay Started")
+                OpenReplay.setupGestureDetector(this)
+                OpenReplay.setUserID("test-user-ivan")
+            }
+        )
     }
 }
 

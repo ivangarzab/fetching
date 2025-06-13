@@ -12,6 +12,7 @@ retrofit = "2.9.0"
 koin = "4.0.3"
 kotlinxCoroutinesTest = "1.10.1"
 mockk = "1.12.0"
+openReplay = "v1.1.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,6 +35,7 @@ koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", versi
 koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+openReplay = { module = "com.github.openreplay:android", version.ref = "openReplay" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

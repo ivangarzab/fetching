@@ -64,6 +64,8 @@ dependencies {
     implementation(libs.koin)
     implementation(libs.koin.compose)
 
+    implementation(libs.openReplay)
+
     testImplementation(libs.junit)
     testImplementation(libs.koin.test)
     testImplementation(libs.kotlinx.coroutines.test)

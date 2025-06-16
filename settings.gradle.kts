@@ -23,3 +23,4 @@ rootProject.name = "Fetching"
 include(":app")
 include(":data")
 include(":domain")
+include(":tracker")

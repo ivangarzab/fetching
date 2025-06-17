@@ -61,6 +61,7 @@ fun LoginScreen() {
 
             TrackComposable(
                 className = "TextField",
+                textValue = emailValue,
                 options = NodeOptions(
                     frame = FrameInfo(0, 0, 0, 0),
                     layer = LayerInfo(borderWidth = 1f, cornerRadius = 4f),
@@ -80,6 +81,7 @@ fun LoginScreen() {
 
             TrackComposable(
                 className = "TextField",
+                textValue = passwordValue,
                 options = NodeOptions(
                     frame = FrameInfo(0, 0, 0, 0),
                     layer = LayerInfo(borderWidth = 1f, cornerRadius = 4f),

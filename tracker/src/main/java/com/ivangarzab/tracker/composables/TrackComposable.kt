@@ -3,6 +3,7 @@ package com.ivangarzab.tracker.composables
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ val LocalParentId = compositionLocalOf<String?> { null }
 fun TrackComposable(
     className: String,
     options: NodeOptions? = null,
+    textValue: String? = null,
     content: @Composable () -> Unit
 ) {
     val parentId = LocalParentId.current
@@ -34,6 +36,13 @@ fun TrackComposable(
 
     val nodeId = remember {
         ComplianceCollector.enterComposable(className, parentId, FrameInfo(0, 0, 0, 0), finalOptions)
+    }
+
+    // Update text value whenever it changes
+    LaunchedEffect(textValue) {
+        if (textValue != null) {
+            ComplianceCollector.updateNodeText(nodeId, textValue)
+        }
     }
 
     CompositionLocalProvider(LocalParentId provides nodeId) {

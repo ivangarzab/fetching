@@ -55,6 +55,12 @@ object ComplianceCollector {
         }
     }
 
+    fun updateNodeText(nodeId: String, text: String) {
+        findNodeById(nodeId)?.let { node ->
+            node.options = node.options.copy(text = text)
+        }
+    }
+
     fun exitComposable(nodeId: String) {
         if (nodeStack.isNotEmpty() && nodeStack.last().id == nodeId) {
             nodeStack.removeLastOrNull()

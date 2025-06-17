@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
+import com.ivangarzab.tracker.extensions.captureLayerInfo
 import com.ivangarzab.tracker.managers.ComplianceCollector
 import com.ivangarzab.tracker.models.FrameInfo
 import com.ivangarzab.tracker.models.LayerInfo

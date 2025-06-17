@@ -3,6 +3,7 @@ package com.ivangarzab.tracker.managers
 import com.ivangarzab.tracker.models.ComposableNode
 import com.ivangarzab.tracker.models.FrameInfo
 import com.ivangarzab.tracker.models.HierarchySnapshot
+import com.ivangarzab.tracker.models.LayerInfo
 import com.ivangarzab.tracker.models.NodeOptions
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -58,6 +59,12 @@ object ComplianceCollector {
     fun updateNodeText(nodeId: String, text: String) {
         findNodeById(nodeId)?.let { node ->
             node.options = node.options.copy(text = text)
+        }
+    }
+
+    fun updateNodeLayer(nodeId: String, layer: LayerInfo) {
+        findNodeById(nodeId)?.let { node ->
+            node.options = node.options.copy(layer = layer)
         }
     }
 

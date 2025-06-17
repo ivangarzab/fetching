@@ -64,7 +64,12 @@ fun LoginScreen() {
                 textValue = emailValue,
                 options = NodeOptions(
                     frame = FrameInfo(0, 0, 0, 0),
-                    layer = LayerInfo(borderWidth = 1f, cornerRadius = 4f),
+                    layer = LayerInfo(
+                        borderColor = "#666666",
+                        borderWidth = 1f,
+                        cornerRadius = 4f,
+                        opacity = 1
+                    ),
                     text = emailValue,
                     isHidden = false
                 )
@@ -84,7 +89,12 @@ fun LoginScreen() {
                 textValue = passwordValue,
                 options = NodeOptions(
                     frame = FrameInfo(0, 0, 0, 0),
-                    layer = LayerInfo(borderWidth = 1f, cornerRadius = 4f),
+                    layer = LayerInfo(
+                        borderColor = "#666666",
+                        borderWidth = 1f,
+                        cornerRadius = 4f,
+                        opacity = 1
+                    ),
                     text = passwordValue,
                     isHidden = false
                 )

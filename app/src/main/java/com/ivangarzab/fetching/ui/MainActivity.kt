@@ -26,6 +26,9 @@ import androidx.compose.ui.unit.dp
 import com.ivangarzab.fetching.ui.theme.FetchingTheme
 import com.ivangarzab.tracker.composables.TrackComposable
 import com.ivangarzab.tracker.managers.ComplianceCollector
+import com.ivangarzab.tracker.models.FrameInfo
+import com.ivangarzab.tracker.models.LayerInfo
+import com.ivangarzab.tracker.models.NodeOptions
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +45,6 @@ class MainActivity : ComponentActivity() {
 // Example usage - manually instrumented screen
 @Composable
 fun LoginScreen() {
-
     var emailValue by remember { mutableStateOf("") }
     var passwordValue by remember { mutableStateOf("") }
 
@@ -58,8 +60,13 @@ fun LoginScreen() {
             }
 
             TrackComposable(
-                name = "EmailField",
-                data = mapOf("value" to emailValue, "label" to "Email")
+                className = "TextField",
+                options = NodeOptions(
+                    frame = FrameInfo(0, 0, 0, 0),
+                    layer = LayerInfo(borderWidth = 1f, cornerRadius = 4f),
+                    text = emailValue,
+                    isHidden = false
+                )
             ) {
                 TextField(
                     value = emailValue,
@@ -72,8 +79,13 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(16.dp))
 
             TrackComposable(
-                name = "PasswordField",
-                data = mapOf("value" to passwordValue, "label" to "Password")
+                className = "TextField",
+                options = NodeOptions(
+                    frame = FrameInfo(0, 0, 0, 0),
+                    layer = LayerInfo(borderWidth = 1f, cornerRadius = 4f),
+                    text = passwordValue,
+                    isHidden = false
+                )
             ) {
                 TextField(
                     value = passwordValue,
@@ -89,12 +101,17 @@ fun LoginScreen() {
             TrackComposable("ButtonSection") {
                 Column {
                     TrackComposable(
-                        name = "LoginButton",
-                        data = mapOf("text" to "Log In", "enabled" to "true")
+                        className = "Button",
+                        options = NodeOptions(
+                            frame = FrameInfo(0, 0, 0, 0),
+                            layer = LayerInfo(cornerRadius = 8f),
+                            backgroundColor = "#1976D2",
+                            text = "Log In",
+                            isHidden = false
+                        )
                     ) {
                         Button(
                             onClick = {
-                                // Print JSON when login is clicked
                                 val json = ComplianceCollector.generateJSON()
                                 println("HIERARCHY JSON:")
                                 println(json)
@@ -108,8 +125,12 @@ fun LoginScreen() {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     TrackComposable(
-                        name = "SignUpButton",
-                        data = mapOf("text" to "Sign Up", "enabled" to "true")
+                        className = "TextButton",
+                        options = NodeOptions(
+                            frame = FrameInfo(0, 0, 0, 0),
+                            text = "Sign Up",
+                            isHidden = false
+                        )
                     ) {
                         TextButton(
                             onClick = { },

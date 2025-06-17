@@ -1,7 +1,9 @@
 package com.ivangarzab.tracker.managers
 
 import com.ivangarzab.tracker.models.ComposableNode
+import com.ivangarzab.tracker.models.FrameInfo
 import com.ivangarzab.tracker.models.HierarchySnapshot
+import com.ivangarzab.tracker.models.NodeOptions
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -10,21 +12,23 @@ object ComplianceCollector {
     private val nodeStack = mutableListOf<ComposableNode>()
     private var nodeCounter = 0L
 
-    fun enterComposable(name: String, parentId: String?, data: Map<String, String> = emptyMap()): String {
+    fun enterComposable(
+        className: String,
+        parentId: String?,
+        frame: FrameInfo,
+        options: NodeOptions
+    ): String {
         val nodeId = "node_${++nodeCounter}"
         val node = ComposableNode(
             id = nodeId,
-            name = name,
-            timestamp = System.currentTimeMillis(),
-            data = data
+            options = options.copy(frame = frame),
+            className = className
         )
 
         if (parentId == null) {
-            // Root level node
             currentHierarchy.add(node)
         } else {
-            // Find parent and add as child
-            findNodeById(parentId)?.children?.add(node)
+            findNodeById(parentId)?.childrens?.add(node)
         }
 
         return nodeId
@@ -33,7 +37,7 @@ object ComplianceCollector {
     private fun findNodeById(id: String): ComposableNode? {
         fun searchNode(node: ComposableNode): ComposableNode? {
             if (node.id == id) return node
-            for (child in node.children) {
+            for (child in node.childrens) {
                 searchNode(child)?.let { return it }
             }
             return null
@@ -43,6 +47,12 @@ object ComplianceCollector {
             searchNode(rootNode)?.let { return it }
         }
         return null
+    }
+
+    fun updateNodeFrame(nodeId: String, frame: FrameInfo) {
+        findNodeById(nodeId)?.let { node ->
+            node.options = node.options.copy(frame = frame)
+        }
     }
 
     fun exitComposable(nodeId: String) {

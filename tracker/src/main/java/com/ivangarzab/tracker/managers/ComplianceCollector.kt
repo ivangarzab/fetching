@@ -13,6 +13,25 @@ object ComplianceCollector {
     private val nodeStack = mutableListOf<ComposableNode>()
     private var nodeCounter = 0L
 
+    fun createFlatElement(label: String, textValue: String? = null): String {
+        val nodeId = "node_${++nodeCounter}"
+        val node = ComposableNode(
+            id = nodeId,
+            options = NodeOptions(
+                frame = FrameInfo(0, 0, 0, 0),
+                layer = LayerInfo(),
+                isSelected = false,
+                isHidden = false,
+                text = textValue
+            ),
+            className = label,
+            childrens = mutableListOf() // Always empty in flat approach
+        )
+
+        currentHierarchy.add(node) // All elements at root level
+        return nodeId
+    }
+
     fun enterComposable(
         className: String,
         parentId: String?,

@@ -30,20 +30,23 @@ data class NodeOptions(
     val isSelected: Boolean = false,
     val isHidden: Boolean = false,
     val backgroundColor: String? = null,
-    // Text-specific properties
     val font: FontInfo? = null,
     val text: String? = null,
     val textColor: String? = null,
     val numberOfLines: Int? = null,
     val textAlignment: Int? = null,
-    // Other properties
-    val progress: Float? = null
+    val progress: Float? = null,
+    val componentType: String? = null,
+    val enabled: Boolean = true,
+    val url: String? = null,
+    val masked: Boolean = false,
+    val metadata: Map<String, String> = emptyMap()
 )
 
 @Serializable
 data class ComposableNode(
     val id: String,
-    var options: NodeOptions,  // Changed from 'val' to 'var'
+    var options: NodeOptions,
     val childrens: MutableList<ComposableNode> = mutableListOf(),
     val className: String
 )

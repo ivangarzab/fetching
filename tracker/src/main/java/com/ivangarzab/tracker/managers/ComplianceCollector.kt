@@ -1,5 +1,6 @@
 package com.ivangarzab.tracker.managers
 
+import com.ivangarzab.tracker.extensions.ComponentType
 import com.ivangarzab.tracker.models.ComposableNode
 import com.ivangarzab.tracker.models.FrameInfo
 import com.ivangarzab.tracker.models.HierarchySnapshot
@@ -13,7 +14,15 @@ object ComplianceCollector {
     private val nodeStack = mutableListOf<ComposableNode>()
     private var nodeCounter = 0L
 
-    fun createFlatElement(label: String, textValue: String? = null): String {
+    fun createFlatElement(
+        label: String,
+        type: ComponentType,
+        value: String? = null,
+        masked: Boolean = false,
+        enabled: Boolean = true,
+        url: String? = null,
+        metadata: Map<String, String> = emptyMap()
+    ): String {
         val nodeId = "node_${++nodeCounter}"
         val node = ComposableNode(
             id = nodeId,
@@ -22,13 +31,21 @@ object ComplianceCollector {
                 layer = LayerInfo(),
                 isSelected = false,
                 isHidden = false,
-                text = textValue
+                text = if (masked && value != null) "***MASKED***" else value,
+                // We'll need to add these new fields to NodeOptions
+                componentType = type.name,
+                enabled = enabled,
+                url = url,
+                masked = masked,
+                metadata = metadata
             ),
             className = label,
-            childrens = mutableListOf() // Always empty in flat approach
+            childrens = mutableListOf()
         )
 
-        currentHierarchy.add(node) // All elements at root level
+        println("DEBUG: Node created with enabled=${node.options.enabled}")
+
+        currentHierarchy.add(node)
         return nodeId
     }
 
@@ -100,7 +117,10 @@ object ComplianceCollector {
             timestamp = System.currentTimeMillis(),
             rootNodes = currentHierarchy.toList()
         )
-        return Json { prettyPrint = true }.encodeToString(snapshot)
+        return Json {
+            prettyPrint = true
+            encodeDefaults = true
+        }.encodeToString(snapshot)
     }
 
     fun reset() {
